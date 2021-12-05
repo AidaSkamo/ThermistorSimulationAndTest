@@ -7,8 +7,8 @@ class ThermistorSimulation:
     default_error_value_positive = 0.1
     default_error_value_negative = -0.1
     r = 10000
-    list_of_keys = []
-    list_of_values = []
+    _list_of_keys = []
+    _list_of_values = []
     _ntc_char = {}
 
     def __init__(self, filepath):
@@ -22,10 +22,10 @@ class ThermistorSimulation:
                     if index > 5:
                         for index_col, i in enumerate(row):
                             if index_col == 0:
-                                self.list_of_keys.append(float(i))
+                                self._list_of_keys.append(float(i))
                             elif index_col == 2:
-                                self.list_of_values.append(float(i)*1000)
-        self._ntc_char = dict(zip(self.list_of_keys, self.list_of_values))
+                                self._list_of_values.append(float(i)*1000)
+        self._ntc_char = dict(zip(self._list_of_keys, self._list_of_values))
         if len(self._ntc_char) == 0:
             print("File is empty! Provide a different path.")
 
@@ -68,8 +68,3 @@ class ThermistorSimulation:
         r_ntc = (voltage_div * self.r) / (voltage_s - voltage_div)
         temper = self.linear_interpolation(r_ntc)
         return temper
-
-
-
-
-
